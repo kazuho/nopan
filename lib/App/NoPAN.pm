@@ -14,6 +14,7 @@ use Scope::Guard;
 # FIXME find and automatically load NoPAN::Installer::*.pm
 require App::NoPAN::Installer::Perl;
 require App::NoPAN::Installer::Configure;
+require App::NoPAN::Installer::Makefile; # should better be the last
 
 my %Defaults = (
     no_install => undef,

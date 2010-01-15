@@ -8,9 +8,34 @@ DESCRIPTION
     Nopan downloads software from a subversion repository or a git
     repository using HTTP, and automatically installs the software.
 
+    Nopan currently supports following types of software repositories.
+
+    autotools-based repositories
+        repositories with `configure' script or `configure.(ac|in)' are
+        considered as autotools-based repositories and are installed using:
+        ./configure && make all && make install. If only `configure.(ac|in)'
+        exists, autoreconf -i will be run prior to generate `configure'.
+
+    perl repositories
+        repositories that have Makefile.PL are considered as perl module
+        repositories and are installed using: perl Makefile.PL && make all
+        test && make install.
+
+    Makefile-only repositories
+        if the repository does not match either of the rules above, but has
+        a `Makefle', nopan will try to install the repository by running:
+        make all && sudo make install.
+
 AUTHOR
     Kazuho Oku Copyright (C) 2010 Cybozu Labs, Inc.
 
 LICENSE
     BSD
+
+POD ERRORS
+    Hey! The above document had some coding errors, which are explained
+    below:
+
+    Around line 67:
+        You forgot a '=back' before '=head1'
 
