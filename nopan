@@ -10,14 +10,15 @@ use Pod::Usage;
 
 our $VERSION = '0.01';
 
-my %opts = (
-    no_install => undef,
-);
+my %opts = %App::NoPAN::Defaults;
 my ($opt_help, $opt_version);
 GetOptions(
-    help         => \$opt_help,
-    version      => \$opt_version,
-    'no-install' => sub { $opts{no_install} = 1 },
+    help           => \$opt_help,
+    version        => \$opt_version,
+    'install'      => sub { $opts{opt_install} = 1 },
+    'I|no-install' => sub { $opts{opt_install} = undef },
+    test           => sub { $opts{opt_test} = 1 },
+    'T|no-test'    => sub { $opts{opt_test} = 0 },
 ) or pod2usage(1);
 if ($opt_help) {
     pod2usage(0);
@@ -29,7 +30,7 @@ die "no args"
     unless @ARGV;
 
 my $nopan = App::NoPAN->new(%opts);
-$nopan->install($_)
+$nopan->run($_)
     for @ARGV;
 
 __END__

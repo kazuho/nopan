@@ -19,7 +19,13 @@ sub can_install {
 sub build {
     my ($self, $nopan) = @_;
     $self->shell_exec($_)
-        for ("$^X Makefile.PL", "$Config{make} all", "$Config{make} test");
+        for ("$^X Makefile.PL", "$Config{make} all");
+}
+
+sub test {
+    my ($self, $nopan) = @_;
+    $self->shell_exec("$Config{make} test")
+        unless defined $nopan->opt_test && $nopan->opt_test == 0;
 }
 
 sub install {

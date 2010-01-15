@@ -19,6 +19,12 @@ sub build {
     $self->shell_exec("$Config{make} all");
 }
 
+sub test {
+    my ($self, $nopan) = @_;
+    $self->shell_exec("$Config{make} test")
+        if $nopan->opt_test;
+}
+
 sub install {
     my ($self, $nopan) = @_;
     $self->shell_exec("$Config{make} install");

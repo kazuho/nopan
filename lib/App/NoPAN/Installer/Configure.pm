@@ -3,7 +3,7 @@ package App::NoPAN::Installer::Configure;
 use strict;
 use warnings;
 
-use base qw(App::NoPAN::Installer);
+use base qw(App::NoPAN::Installer::Makefile);
 use List::Util qw(first);
 use Config;
 
@@ -20,13 +20,8 @@ sub build {
     my ($self, $nopan) = @_;
     $self->shell_exec('autoreconf -i')
         unless -e 'configure';
-    $self->shell_exec($_)
-        for ("./configure", "$Config{make} all");
-}
-
-sub install {
-    my ($self, $nopan) = @_;
-    $self->shell_exec("$Config{make} install");
+    $self->shell_exec('./configure');
+    $self->SUPER::build($nopan);
 }
 
 1;

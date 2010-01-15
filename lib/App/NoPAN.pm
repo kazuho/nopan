@@ -16,8 +16,9 @@ require App::NoPAN::Installer::Perl;
 require App::NoPAN::Installer::Configure;
 require App::NoPAN::Installer::Makefile; # should better be the last
 
-my %Defaults = (
-    no_install => undef,
+our %Defaults = (
+    opt_install => 1,
+    opt_test    => undef, # tristate: 0:no, 1:yes, undef:default
 );
 my @Installers;
 
@@ -31,7 +32,7 @@ sub new {
     }, $klass;
 }
 
-sub install {
+sub run {
     my ($self, $url) = @_;
     
     die "invalid URL:$url"
@@ -54,8 +55,9 @@ sub install {
         chdir $workdir
             or die "failed to change directory to:$workdir:$!";
         $installer->build($self);
+        $installer->test($self);
         $installer->install($self)
-            unless $self->no_install;
+            if $self->opt_install;
     }
 }
 
