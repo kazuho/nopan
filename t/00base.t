@@ -3,6 +3,6 @@ use warnings;
 
 use Test::More;
 
-use_ok('App::NoCPAN');
+use_ok('App::NoPAN');
 
 done_testing;
