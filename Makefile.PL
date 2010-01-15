@@ -1,0 +1,21 @@
+use inc::Module::Install;
+
+name 'App-NoPAN';
+all_from 'nopan';
+
+license 'bsd';
+perl_version '5.8.5';
+
+requires 'Pod::Usage';
+requires 'HTML::LinkExtor';
+requires 'LWP::Simple';
+requires 'Scope::Guard';
+
+test_requires 'Test::More' => 0.88;
+
+install_script 'nopan';
+
+auto_include;
+auto_install;
+
+WriteAll;
