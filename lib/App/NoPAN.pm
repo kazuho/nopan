@@ -92,7 +92,7 @@ sub files_from_dir {
     return grep {
         $_ !~ m{^(\.{1,2}|)$},
     } map {
-        $_ =~ /^$url/ ? ($') : ()
+        substr($_, 0, length $url) eq $url ? (substr $_, length $url) : ()
     } map {
         my ($tag, %attr) = @$_;
         $tag eq 'a' && $attr{href} ? ($attr{href}) : ();
