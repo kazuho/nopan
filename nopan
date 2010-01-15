@@ -8,7 +8,7 @@ use App::NoPAN;
 use Getopt::Long;
 use Pod::Usage;
 
-my $VERSION = '0.01';
+our $VERSION = '0.01';
 
 my %opts = (
     no_install => undef,
