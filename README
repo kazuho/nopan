@@ -1,0 +1,16 @@
+NAME
+    nopan - download software from source-code repository and install
+
+SYNOPSIS
+      nopan http://svn-or-git-repository
+
+DESCRIPTION
+    Nopan downloads software from a subversion repository or a git
+    repository using HTTP, and automatically installs the software.
+
+AUTHOR
+    Kazuho Oku Copyright (C) 2010 Cybozu Labs, Inc.
+
+LICENSE
+    BSD
+

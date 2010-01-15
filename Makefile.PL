@@ -2,9 +2,7 @@ use inc::Module::Install;
 
 name 'App-NoPAN';
 all_from 'nopan';
-
-license 'bsd';
-perl_version '5.8.5';
+readme_from 'nopan';
 
 requires 'Pod::Usage';
 requires 'HTML::LinkExtor';
