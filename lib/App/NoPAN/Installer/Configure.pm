@@ -5,6 +5,7 @@ use warnings;
 
 use base qw(App::NoPAN::Installer);
 use List::Util qw(first);
+use Config;
 
 App::NoPAN->register(__PACKAGE__);
 
@@ -20,12 +21,12 @@ sub build {
     $self->shell_exec('autoreconf -i')
         unless -e 'configure';
     $self->shell_exec($_)
-        for ("./configure", "make all");
+        for ("./configure", "$Config{make} all");
 }
 
 sub install {
     my ($self, $nopan) = @_;
-    $self->shell_exec("make install");
+    $self->shell_exec("$Config{make} install");
 }
 
 1;

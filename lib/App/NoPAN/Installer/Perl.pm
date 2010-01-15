@@ -5,6 +5,7 @@ use warnings;
 
 use base qw(App::NoPAN::Installer);
 use List::Util qw(first);
+use Config;
 
 App::NoPAN->register(__PACKAGE__);
 
@@ -18,12 +19,12 @@ sub can_install {
 sub build {
     my ($self, $nopan) = @_;
     $self->shell_exec($_)
-        for ("$^X Makefile.PL", "make all", "make test");
+        for ("$^X Makefile.PL", "$Config{make} all", "$Config{make} test");
 }
 
 sub install {
     my ($self, $nopan) = @_;
-    $self->shell_exec("make install");
+    $self->shell_exec("$Config{make} install");
 }
 
 1;
