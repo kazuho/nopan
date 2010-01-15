@@ -41,7 +41,7 @@ nopan - download software from source-code repository and install
 
 =head1 SYNOPSIS
 
-  nopan [options] http://svn-or-git-repository
+% nopan [options] http://svn-or-git-repository
 
 =over 4
 
@@ -79,7 +79,7 @@ repositories that have Makefile.PL are considered as perl module repositories an
 
 if the repository does not match either of the rules above, but has a `Makefle', nopan will try to install the repository by running: make all && sudo make install.
 
-=cut
+=back
 
 =head1 AUTHOR
 
