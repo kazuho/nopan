@@ -77,7 +77,7 @@ sub fetch_all {
             print "$subdir$f\n";
             my $r = LWP::Simple::mirror("$base_url$subdir$f", "$dir/$subdir$f");
             die "failed to fetch URL:$base_url$subdir$f, got $r"
-                unless $r == 200; # || $r == 304;
+                unless $r == 200;
             $fetched->{"$subdir$f"} = 1;
         }
     }
