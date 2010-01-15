@@ -81,6 +81,8 @@ sub fetch_all {
             my $r = LWP::Simple::mirror("$base_url$subdir$f", "$dir/$subdir$f");
             die "failed to fetch URL:$base_url$subdir$f, got $r"
                 unless $r == 200;
+            chmod 0755, "$dir/$subdir$f"
+                or die "failed to set chmod +x on file:$dir/$subdir/$f:$!";
             $fetched->{"$subdir$f"} = 1;
         }
     }
