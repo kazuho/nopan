@@ -41,7 +41,23 @@ nopan - download software from source-code repository and install
 
 =head1 SYNOPSIS
 
-  nopan http://svn-or-git-repository
+  nopan [options] http://svn-or-git-repository
+
+=over 4
+
+=item -i, --install
+
+=item -I, --no-install
+
+installs (or does not install) the repository (default: yes)
+
+=item -t, --test
+
+=item -T, --no-test
+
+runs (or does not run) the test suit (default: depends on the type of the repository)
+
+=back
 
 =head1 DESCRIPTION
 
