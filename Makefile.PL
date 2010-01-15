@@ -9,6 +9,7 @@ requires 'HTML::LinkExtor';
 requires 'LWP::Simple';
 requires 'Scope::Guard';
 
+test_requires 'File::Slurp';
 test_requires 'Test::More' => 0.88;
 
 install_script 'nopan';

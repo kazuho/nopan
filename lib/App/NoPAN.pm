@@ -69,15 +69,15 @@ sub fetch_all {
             $self->fetch_all(
                 $base_url,
                 $dir,
-                $f,
-                [ $self->files_from_dir("$base_url$f") ],
+                "$subdir$f",
+                [ $self->files_from_dir("$base_url$subdir$f") ],
                 $fetched,
             );
         } elsif (! $fetched->{"$subdir$f"}) {
             print "$subdir$f\n";
             my $r = LWP::Simple::mirror("$base_url$subdir$f", "$dir/$subdir$f");
             die "failed to fetch URL:$base_url$subdir$f, got $r"
-                unless $r == 200;
+                unless $r == 200; # || $r == 304;
             $fetched->{"$subdir$f"} = 1;
         }
     }
@@ -88,7 +88,9 @@ sub files_from_dir {
     
     my $body = LWP::Simple::get($url)
         or die "failed to fetch URL:$url";
-    return map {
+    return grep {
+        $_ !~ m{^(\.{1,2}|)$},
+    } map {
         $_ =~ /^$url/ ? ($') : ()
     } map {
         my ($tag, %attr) = @$_;
