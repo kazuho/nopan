@@ -8,6 +8,7 @@ requires 'Pod::Usage';
 requires 'HTML::LinkExtor';
 requires 'LWP::Simple';
 requires 'Scope::Guard';
+requires 'URI::Escape';
 
 # for Installer::Perl
 requires 'Archive::Tar';

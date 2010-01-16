@@ -10,6 +10,7 @@ use HTML::LinkExtor;
 use List::Util qw(first);
 use LWP::Simple ();
 use Scope::Guard;
+use URI::Escape qw/uri_unescape/;
 
 # FIXME find and automatically load NoPAN::Installer::*.pm
 require App::NoPAN::Installer::Perl;
@@ -104,7 +105,7 @@ sub files_from_dir {
         substr($_, 0, length $url) eq $url ? (substr $_, length $url) : ()
     } map {
         my ($tag, %attr) = @$_;
-        $tag eq 'a' && $attr{href} ? ($attr{href}) : ();
+        $tag eq 'a' && $attr{href} ? (uri_unescape $attr{href}) : ();
     } do {
         my $lx = HTML::LinkExtor->new(undef, $url);
         $lx->parse($body);
