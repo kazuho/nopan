@@ -9,6 +9,10 @@ requires 'HTML::LinkExtor';
 requires 'LWP::Simple';
 requires 'Scope::Guard';
 
+# for Installer::Perl
+requires 'Archive::Tar';
+requires 'CPAN::Inject';
+
 test_requires 'File::Slurp';
 test_requires 'Test::More' => 0.88;
 
