@@ -10,6 +10,7 @@ use CPAN::Inject;
 use File::Temp;
 use Archive::Tar qw/COMPRESS_GZIP/;
 use CPAN ();
+use Path::Class qw/dir/;
 
 App::NoPAN->register(__PACKAGE__);
 
@@ -19,7 +20,11 @@ sub new {
 
     my $tmp = File::Temp->new(UNLINK => 1, SUFFIX => '.tar.gz');
     my $tar = Archive::Tar->new;
-    $tar->add_files(@{$self->root_files});
+    dir('.')->recurse(
+        callback => sub {
+            $tar->add_files($_[0]);
+        }
+    );
     $tar->write($tmp->filename, COMPRESS_GZIP);
 
     my $inject = CPAN::Inject->from_cpan_config();
