@@ -8,6 +8,7 @@ requires 'Pod::Usage';
 requires 'HTML::LinkExtor';
 requires 'LWP::Simple';
 requires 'Scope::Guard';
+requires 'URI::Escape';
 
 test_requires 'File::Slurp';
 test_requires 'Test::More' => 0.88;
