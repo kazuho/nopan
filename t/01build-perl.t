@@ -4,6 +4,9 @@ use warnings;
 use Cwd;
 use File::Temp qw(tempdir);
 use Test::More;
+use CPAN::Inject;
+
+plan skip_all => "CPAN::Inject->from_cpan_config() failed: $@." unless eval "CPAN::Inject->from_cpan_config(); 1;";
 
 $| = 1;
 
