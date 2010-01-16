@@ -44,8 +44,9 @@ sub run {
     warn "downloading files from URL:$url\n";
     my @root_files = $self->files_from_dir($url);
     
-    my $installer = first { $_->can_install($self, \@root_files) } @Installers
-        or die "do not know how to install:$url";
+    my $installer_class =
+            first { $_->can_install($self, \@root_files) } @Installers;
+    die "do not know how to install:$url" unless $installer_class;
     
     my $workdir = tempdir(CLEANUP => 1);
     $self->fetch_all($url, $workdir, '', \@root_files);
@@ -55,6 +56,10 @@ sub run {
         my $popdir = Scope::Guard->new(sub { chdir $pwd });
         chdir $workdir
             or die "failed to change directory to:$workdir:$!";
+        my $installer = $installer_class->new(
+            url        =>  $url,
+            root_files => \@root_files,
+        );
         $installer->build($self);
         $installer->test($self);
         $installer->install($self)

@@ -2,7 +2,6 @@ use strict;
 use warnings;
 
 use Cwd;
-use File::Slurp qw(read_file);
 use File::Temp qw(tempdir);
 use Test::More;
 
@@ -35,8 +34,11 @@ unless (my $pid = fork) {
 while (wait == -1) {}
 my $exit_status = $?;
 
-print STDERR "nopan exitted with status:$@\n", read_file("$tempdir/build.log")
-    if $exit_status;
+open my $fh, '<', "$tempdir/build.log"
+    or die "failed to open $tempdir/build.log:$!";
+print STDERR "******** $_"
+    for ("log of test build:\n", <$fh>);
+close $fh;
 is $exit_status, 0, "build and test";
 
 done_testing;

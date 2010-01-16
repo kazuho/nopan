@@ -10,6 +10,11 @@ requires 'LWP::Simple';
 requires 'Scope::Guard';
 requires 'URI::Escape';
 
+# for Installer::Perl
+requires 'Archive::Tar';
+requires 'CPAN::Inject';
+requires 'Path::Class';
+
 test_requires 'File::Slurp';
 test_requires 'Test::More' => 0.88;
 
