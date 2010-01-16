@@ -25,6 +25,7 @@ unless (my $pid = fork) {
         or die "failed to redirect STDERR:$!";
     close $fh;
     exec(
+        $^X,
         qw(blib/script/nopan --no-install),
         "file://@{[getcwd]}/t.assets/perl/",
     );
