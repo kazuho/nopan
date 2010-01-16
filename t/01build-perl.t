@@ -24,6 +24,7 @@ unless (my $pid = fork) {
     open STDERR, '>&', $fh,
         or die "failed to redirect STDERR:$!";
     close $fh;
+    close STDIN;
     exec(
         $^X,
         qw(blib/script/nopan --no-install),
