@@ -32,11 +32,18 @@ DESCRIPTION
 
     Makefile-only repositories
         if the repository does not match either of the rules above, but has
-        a `Makefle', nopan will try to install the repository by running:
+        a `Makefile', nopan will try to install the repository by running:
         make all && sudo make install.
 
 AUTHOR
-    Kazuho Oku Copyright (C) 2010 Cybozu Labs, Inc.
+    Kazuho Oku
+
+CONTRIBUTORS
+    tokuhirom
+
+    mattn
+
+    xaicron
 
 LICENSE
     BSD
