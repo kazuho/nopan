@@ -27,9 +27,13 @@ __PACKAGE__->mk_accessors(keys %Defaults);
 
 sub new {
     my ($klass, %opts) = @_;
+    my $ua = LWP::UserAgent->new();
+       $ua->agent("nopan");
+       $ua->env_proxy;
     bless {
         %Defaults,
         %opts,
+        ua => $ua,
     }, $klass;
 }
 
@@ -97,8 +101,10 @@ sub fetch_all {
 sub files_from_dir {
     my ($self, $url) = @_;
     
-    my $body = LWP::Simple::get($url)
-        or die "failed to fetch URL:$url";
+    my $res = $self->{ua}->get($url);
+    $res->is_success
+        or die "failed to fetch URL:$url, @{[ $res->status_line ]}";
+    my $body = $res->content;
     return grep {
         $_ !~ m{^(\.{1,2}|)$},
     } map {
